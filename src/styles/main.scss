@@ -8,13 +8,21 @@ body {
   height: 100vh;
   display: grid;
   grid-template-columns: 1fr auto 1fr;
-  grid-template-rows: 1fr auto 1fr auto 1fr;
+  grid-template-rows: 1fr auto 1fr auto 4fr;
   grid-template-areas:
-    ". . ."
+    "header header header"
     ". board ."
     " . . ."
     ". keys ."
     ". . .";
+}
+
+header {
+  grid-area: header;
+  font-size: 0.95vw;
+  color: gray;
+  display: flex;
+  justify-content: space-between;
 }
 
 .Board {
@@ -23,13 +31,13 @@ body {
 }
 
 .Board__row__letter {
-  width: 5.5rem;
-  height: 5.5rem;
-  margin: 0.2rem;
-  font-size: 1.5rem;
+  width: 4vw;
+  height: 4vw;
+  margin: 0.2vw;
+  font-size: 1vw;
   text-transform: uppercase;
   background-color: white;
-  border: rgba(128, 128, 128, 0.705) 0.2rem solid;
+  border: rgba(128, 128, 128, 0.705) 0.1vw solid;
   color: transparent;
 }
 
@@ -37,7 +45,7 @@ body {
   grid-area: keys;
   display: flex;
   flex-direction: column;
-  border: rgba(128, 128, 128, 0) 0.2rem solid;
+  border: rgba(128, 128, 128, 0) 0.2vw solid;
 }
 
 .Keys__row {
@@ -46,13 +54,13 @@ body {
 }
 
 .Keys__row__key {
-  font-size: 1.5rem;
-  padding: 1.95rem;
+  font-size: 1vw;
+  padding: 1.3vw;
   background-color: lightgray;
   color: gray;
-  margin: 0.5rem;
-  border-radius: 0.2rem;
-  border: rgba(128, 128, 128, 0) 0.2rem solid;
+  margin: 0.2vw;
+  border-radius: 0.2vw;
+  border: rgba(128, 128, 128, 0) 0.2vw solid;
 }
 
 .Board__row__letter.guess {
@@ -63,18 +71,18 @@ body {
 .Board__row__letter.exact {
   background-color: rgb(20, 121, 20);
   color: white;
-  border: rgba(128, 128, 128, 0) 0.2rem solid;
+  border: rgba(128, 128, 128, 0) 0.2vw solid;
 }
 .Keys__row__key.almost,
 .Board__row__letter.almost {
   background-color: rgb(205, 195, 50);
   color: white;
-  border: rgba(128, 128, 128, 0) 0.2rem solid;
+  border: rgba(128, 128, 128, 0) 0.2vw solid;
 }
 
 .Keys__row__key.none,
 .Board__row__letter.none {
   color: white;
   background-color: gray;
-  border: rgba(128, 128, 128, 0) 0.2rem solid;
+  border: rgba(128, 128, 128, 0) 0.2vw solid;
 }

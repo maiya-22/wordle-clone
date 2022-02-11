@@ -71,6 +71,7 @@ const App = () => {
     app.renderBoardToDOM();
     app.renderKeysToDOM();
     app.addEventListeners();
+    app.renderGitHubLink();
   };
   return app;
 };
