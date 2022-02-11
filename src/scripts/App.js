@@ -1,5 +1,6 @@
 import words from "./words/index.js";
 
+import canAddEventListeners from "./app-methods/event-listeners.js";
 import canUpdateElements from "./app-methods/update-elements.js";
 import canGetElements from "./app-methods/get-elements.js";
 import canGetWord from "./app-methods/get-word.js";
@@ -26,6 +27,7 @@ const App = () => {
   canGetWord(app);
   canRenderHTML(app);
   canGuess(app);
+  canAddEventListeners(app);
 
   app.words = words;
 
@@ -47,14 +49,6 @@ const App = () => {
     ["a", "s", "d", "f", "g", "h", "j", "k", "l"],
     ["enter", "z", "x", "c", "v", "b", "n", "m", "delete"],
   ];
-
-  app.handleGuessWord = (e) => {};
-
-  app.addEventListeners = () => {
-    app.getKeyEls().forEach((el) => {
-      el.addEventListener("click", app.handleGuessLetter);
-    });
-  };
 
   app.init = () => {
     app.setState({ guesses: app.getGuesses() });

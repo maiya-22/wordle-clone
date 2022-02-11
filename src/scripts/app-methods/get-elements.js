@@ -9,6 +9,10 @@ export default (app) => {
     return document.getElementsByClassName("Keys")[0];
   };
 
+  app.getEnterKey = () => {
+    return document.querySelector('[data-letter="enter"]');
+  };
+
   app.getKeyEls = () => {
     return Array.from(document.getElementsByClassName("Keys__row__key"));
   };

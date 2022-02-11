@@ -25,4 +25,12 @@ export default (app) => {
     app.updateBoardEls();
     app.updateKeysEls();
   };
+
+  app.handleGuessWord = (e) => {
+    console.log("guess word");
+  };
+  // app.handleGuessWord = (e) => {
+  //   app.updateBoardEls();
+  //   app.updateKeysEls();
+  // };
 };
