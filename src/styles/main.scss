@@ -26,11 +26,24 @@ body {
   width: 5.5rem;
   height: 5.5rem;
   margin: 0.2rem;
+  font-size: 1.5rem;
+  text-transform: uppercase;
   background-color: gray;
+  color: transparent;
 }
 
 .Board__row__letter.exact {
-  background-color: green;
+  background-color: rgb(20, 121, 20);
+  color: white;
+}
+
+.Board__row__letter.almost {
+  background-color: rgb(205, 195, 50);
+  color: white;
+}
+
+.Board__row__letter.none {
+  color: white;
 }
 
 .Keys {

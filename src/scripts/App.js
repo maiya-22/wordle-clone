@@ -24,10 +24,16 @@ const App = () => {
       let column = Number(el.dataset.column);
       let row = Number(el.dataset.row);
       let guess = app.state.guesses[row][column];
-      if (guess && guess.status === "exact") {
+      if (!guess) return null;
+      if (guess.status === "exact") {
         el.classList.add("exact");
-        el.innerHTML = app.state.word[column];
+      } else if (guess.status === "almost") {
+        el.classList.add("almost");
+      } else if (guess.status === "none") {
+        el.classList.add("none");
+      } else {
       }
+      el.textContent = guess.letter;
     });
   };
 
@@ -85,8 +91,6 @@ const App = () => {
 
     result = exactMatch ? "exact" : almostMatch ? "almost" : "none";
     let guess = {
-      round: app.state.round,
-      position: app.state.position,
       letter: letter,
       status: result,
     };
@@ -112,9 +116,7 @@ const App = () => {
                             class="Board__row__letter" 
                             data-column="${k}"
                             data-row="${i}"
-                            data-letter="${letter}">${
-                  letter || ""
-                }- col: ${k} row: ${i}</button>`;
+                            data-letter="${letter}">${letter || "x"}</button>`;
                 return html;
               }, "");
             })()}
