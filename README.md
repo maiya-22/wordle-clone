@@ -3,10 +3,11 @@
 - Vanilla JS and Sass
 - Compiled with Parcel.js
 
-### Deployed
+#### Deployed
 
 [wordley-wordle-clone](https://wordley-wordle-clone.netlify.app/)
-![screenshot]()
+
+![screenshot](https://github.com/maiya-22/wordle-clone/tree/main/github)
 
 #### To Start App for Local Dev
 
