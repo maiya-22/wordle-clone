@@ -61,8 +61,6 @@ const App = () => {
     return hash;
   }, {});
 
-  console.log("app.keys:", app.keys);
-
   app.init = () => {
     app.setState({
       guesses: app.getGuesses(),
