@@ -1,8 +1,12 @@
 import words from "./words/index.js";
 
+import canUpdateElements from "./app-methods/update-elements.js";
+import canGetElements from "./app-methods/get-elements.js";
+import canGetWord from "./app-methods/get-word.js";
+import canRenderHTML from "./app-methods/render-html.js";
+import canGuess from "./app-methods/guess";
 const App = () => {
   const app = {};
-
   app.state = {
     word: null,
     guesses: null,
@@ -17,70 +21,13 @@ const App = () => {
     console.log("state:", app.state);
   };
 
+  canUpdateElements(app);
+  canGetElements(app);
+  canGetWord(app);
+  canRenderHTML(app);
+  canGuess(app);
+
   app.words = words;
-
-  app.updateKeysEls = () => {
-    let allGuessesHash = app.state.guesses
-      .reduce((arr, rowOfGuesses) => {
-        rowOfGuesses.forEach((guess) => {
-          if (guess) arr.push(guess);
-        });
-        return arr;
-      }, [])
-      .reduce((hash, guess) => {
-        hash[guess.letter] = guess.status;
-        return hash;
-      }, {});
-    app.getKeyEls().forEach((keyEl) => {
-      let status = allGuessesHash[keyEl.dataset.letter];
-      if (status === "exact") {
-        keyEl.classList.add("exact");
-      } else if (status === "almost") {
-        keyEl.classList.add("almost");
-      } else if (status === "none") {
-        keyEl.classList.add("none");
-      } else {
-      }
-    });
-  };
-
-  app.updateBoardEls = () => {
-    app.getBoardLetterEls().forEach((el) => {
-      let column = Number(el.dataset.column);
-      let row = Number(el.dataset.row);
-      let guess = app.state.guesses[row][column];
-      if (!guess) return null;
-      if (guess.status === "exact") {
-        el.classList.add("exact");
-      } else if (guess.status === "almost") {
-        el.classList.add("almost");
-      } else if (guess.status === "none") {
-        el.classList.add("none");
-      } else {
-      }
-      el.textContent = guess.letter;
-    });
-  };
-
-  app.getRandomWord = () => {
-    let wordKeys = Object.keys(app.words);
-    let randomIndex = Math.floor(Math.random() * wordKeys.length);
-    app.setState({ word: wordKeys[randomIndex] });
-  };
-
-  app.getBoardLetterEls = () => {
-    return Array.from(document.getElementsByClassName("Board__row__letter"));
-  };
-  app.getBoardEl = () => {
-    return document.getElementsByClassName("Board")[0];
-  };
-  app.getKeysEl = () => {
-    return document.getElementsByClassName("Keys")[0];
-  };
-
-  app.getKeyEls = () => {
-    return Array.from(document.getElementsByClassName("Keys__row__key"));
-  };
 
   app.getGuesses = () => {
     return (
@@ -101,72 +48,7 @@ const App = () => {
     ["enter", "z", "x", "c", "v", "b", "n", "m", "delete"],
   ];
 
-  app.handleGuessLetter = (e) => {
-    if (app.state.position >= app.state.word.length) {
-      console.warn("to do: next round");
-      return null;
-    }
-    let { letter } = e.target.dataset;
-    let result, exactMatch, almostMatch, noMatch, nextGuesses;
-    exactMatch = app.state.word[app.state.position] === letter;
-    if (!exactMatch) {
-      almostMatch = app.state.word.split("").includes(letter);
-    }
-    noMatch = !exactMatch;
-    result = exactMatch ? "exact" : almostMatch ? "almost" : "none";
-    let guess = {
-      letter: letter,
-      status: result,
-    };
-    nextGuesses = app.state.guesses;
-    nextGuesses[app.state.round][app.state.position] = guess;
-    app.setState({
-      position: app.state.position + 1,
-      guesses: nextGuesses,
-    });
-    app.updateBoardEls();
-    app.updateKeysEls();
-  };
-
   app.handleGuessWord = (e) => {};
-
-  app.renderBoardToDOM = () => {
-    app.getBoardEl().innerHTML = app.state.guesses
-      .map((word, i) => {
-        return `
-        <div class="Board__row">
-            ${(() => {
-              return word.reduce((html, letter, k) => {
-                html += `<button 
-                            class="Board__row__letter" 
-                            data-column="${k}"
-                            data-row="${i}"
-                            data-letter="${letter}">${letter || "x"}</button>`;
-                return html;
-              }, "");
-            })()}
-        </div>
-        `;
-      })
-      .join("");
-  };
-
-  app.renderKeysToDOM = () => {
-    app.getKeysEl().innerHTML = app.keys
-      .map((row) => {
-        return `
-            <div class="Keys__row">
-                ${(() => {
-                  return row.reduce((html, key) => {
-                    html += `<button class="Keys__row__key" data-letter="${key}">${key}</button>`;
-                    return html;
-                  }, "");
-                })()}
-            </div>
-        `;
-      })
-      .join("");
-  };
 
   app.addEventListeners = () => {
     app.getKeyEls().forEach((el) => {
