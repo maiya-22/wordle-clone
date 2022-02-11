@@ -1,4 +1,10 @@
 import "../styles/reset.scss";
 import "../styles/main.scss";
 
-console.log("scripts");
+import App from "./App";
+
+const app = App();
+
+app.init();
+
+console.log("app", app);
