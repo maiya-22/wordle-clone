@@ -19,6 +19,31 @@ const App = () => {
 
   app.words = words;
 
+  app.updateKeysEls = () => {
+    let allGuessesHash = app.state.guesses
+      .reduce((arr, rowOfGuesses) => {
+        rowOfGuesses.forEach((guess) => {
+          if (guess) arr.push(guess);
+        });
+        return arr;
+      }, [])
+      .reduce((hash, guess) => {
+        hash[guess.letter] = guess.status;
+        return hash;
+      }, {});
+    app.getKeyEls().forEach((keyEl) => {
+      let status = allGuessesHash[keyEl.dataset.letter];
+      if (status === "exact") {
+        keyEl.classList.add("exact");
+      } else if (status === "almost") {
+        keyEl.classList.add("almost");
+      } else if (status === "none") {
+        keyEl.classList.add("none");
+      } else {
+      }
+    });
+  };
+
   app.updateBoardEls = () => {
     app.getBoardLetterEls().forEach((el) => {
       let column = Number(el.dataset.column);
@@ -88,7 +113,6 @@ const App = () => {
       almostMatch = app.state.word.split("").includes(letter);
     }
     noMatch = !exactMatch;
-
     result = exactMatch ? "exact" : almostMatch ? "almost" : "none";
     let guess = {
       letter: letter,
@@ -96,13 +120,14 @@ const App = () => {
     };
     nextGuesses = app.state.guesses;
     nextGuesses[app.state.round][app.state.position] = guess;
-
     app.setState({
       position: app.state.position + 1,
       guesses: nextGuesses,
     });
     app.updateBoardEls();
+    app.updateKeysEls();
   };
+
   app.handleGuessWord = (e) => {};
 
   app.renderBoardToDOM = () => {

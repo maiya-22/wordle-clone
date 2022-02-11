@@ -28,28 +28,16 @@ body {
   margin: 0.2rem;
   font-size: 1.5rem;
   text-transform: uppercase;
-  background-color: gray;
+  background-color: white;
+  border: rgba(128, 128, 128, 0.705) 0.2rem solid;
   color: transparent;
-}
-
-.Board__row__letter.exact {
-  background-color: rgb(20, 121, 20);
-  color: white;
-}
-
-.Board__row__letter.almost {
-  background-color: rgb(205, 195, 50);
-  color: white;
-}
-
-.Board__row__letter.none {
-  color: white;
 }
 
 .Keys {
   grid-area: keys;
   display: flex;
   flex-direction: column;
+  border: rgba(128, 128, 128, 0) 0.2rem solid;
 }
 
 .Keys__row {
@@ -64,4 +52,25 @@ body {
   color: gray;
   margin: 0.5rem;
   border-radius: 0.2rem;
+  border: rgba(128, 128, 128, 0) 0.2rem solid;
+}
+
+.Keys__row__key.exact,
+.Board__row__letter.exact {
+  background-color: rgb(20, 121, 20);
+  color: white;
+  border: rgba(128, 128, 128, 0) 0.2rem solid;
+}
+.Keys__row__key.almost,
+.Board__row__letter.almost {
+  background-color: rgb(205, 195, 50);
+  color: white;
+  border: rgba(128, 128, 128, 0) 0.2rem solid;
+}
+
+.Keys__row__key.none,
+.Board__row__letter.none {
+  color: white;
+  background-color: gray;
+  border: rgba(128, 128, 128, 0) 0.2rem solid;
 }
