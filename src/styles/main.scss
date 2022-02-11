@@ -25,6 +25,11 @@ header {
   justify-content: space-between;
 }
 
+.header__link {
+  margin: 1vw;
+  opacity: 0.5;
+}
+
 .Board {
   grid-area: board;
   margin: auto;
