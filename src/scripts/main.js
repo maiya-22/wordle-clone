@@ -6,5 +6,3 @@ import App from "./App";
 const app = App();
 
 app.init();
-
-console.log("app", app);

@@ -23,19 +23,16 @@ const App = () => {
     app.getBoardLetterEls().forEach((el) => {
       let column = Number(el.dataset.column);
       let row = Number(el.dataset.row);
-      console.log("el:", el);
-      console.log("column", column, "row", row);
       let guess = app.state.guesses[row][column];
       if (guess && guess.status === "exact") {
         el.classList.add("exact");
-        el.innerHTML = app.state.word[row];
+        el.innerHTML = app.state.word[column];
       }
     });
   };
 
   app.getRandomWord = () => {
     let wordKeys = Object.keys(app.words);
-    console.log("keys.length", wordKeys.length);
     let randomIndex = Math.floor(Math.random() * wordKeys.length);
     app.setState({ word: wordKeys[randomIndex] });
   };
@@ -74,6 +71,10 @@ const App = () => {
   ];
 
   app.handleGuessLetter = (e) => {
+    if (app.state.position >= app.state.word.length) {
+      console.warn("to do: next round");
+      return null;
+    }
     let { letter } = e.target.dataset;
     let result, exactMatch, almostMatch, noMatch, nextGuesses;
     exactMatch = app.state.word[app.state.position] === letter;
@@ -90,9 +91,8 @@ const App = () => {
       status: result,
     };
     nextGuesses = app.state.guesses;
-    nextGuesses[app.state.position][app.state.round] = guess;
+    nextGuesses[app.state.round][app.state.position] = guess;
 
-    console.log("letter:", letter);
     app.setState({
       position: app.state.position + 1,
       guesses: nextGuesses,
@@ -110,8 +110,8 @@ const App = () => {
               return word.reduce((html, letter, k) => {
                 html += `<button 
                             class="Board__row__letter" 
-                            data-column="${i}"
-                            data-row="${k}"
+                            data-column="${k}"
+                            data-row="${i}"
                             data-letter="${letter}">${
                   letter || ""
                 }- col: ${k} row: ${i}</button>`;
@@ -148,7 +148,6 @@ const App = () => {
   };
 
   app.init = () => {
-    console.log("words:", app.words);
     app.setState({ guesses: app.getGuesses() });
     app.getRandomWord();
     app.renderBoardToDOM();
