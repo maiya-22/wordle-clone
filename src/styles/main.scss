@@ -29,6 +29,10 @@ body {
   background-color: gray;
 }
 
+.Board__row__letter.exact {
+  background-color: green;
+}
+
 .Keys {
   grid-area: keys;
   display: flex;
