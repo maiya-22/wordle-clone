@@ -11,6 +11,7 @@ const App = () => {
   app.state = {
     word: null,
     guesses: null,
+    keys: null,
     round: 0,
     position: 0,
   };
@@ -50,8 +51,24 @@ const App = () => {
     ["enter", "z", "x", "c", "v", "b", "n", "m", "delete"],
   ];
 
+  app.keysHash = app.keys.reduce((hash, row) => {
+    row.forEach((letter) => {
+      hash[letter] = {
+        letter,
+        status: null,
+      };
+    });
+    return hash;
+  }, {});
+
+  console.log("app.keys:", app.keys);
+
   app.init = () => {
-    app.setState({ guesses: app.getGuesses() });
+    app.setState({
+      guesses: app.getGuesses(),
+      keys: app.keys,
+      keysHash: app.keysHash,
+    });
     app.getRandomWord();
     app.renderBoardToDOM();
     app.renderKeysToDOM();

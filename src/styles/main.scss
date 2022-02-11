@@ -55,6 +55,10 @@ body {
   border: rgba(128, 128, 128, 0) 0.2rem solid;
 }
 
+.Board__row__letter.guess {
+  color: black;
+}
+
 .Keys__row__key.exact,
 .Board__row__letter.exact {
   background-color: rgb(20, 121, 20);

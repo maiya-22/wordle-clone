@@ -17,20 +17,22 @@ export default (app) => {
     });
   };
 
+  app.updateBoardElsWithLetters = () => {
+    app.getBoardLetterEls().forEach((el) => {
+      let column = Number(el.dataset.column);
+      let row = Number(el.dataset.row);
+      let guess = app.state.guesses[row][column];
+      if (!guess) return null;
+
+      el.classList.add("guess");
+      el.textContent = guess.letter;
+    });
+  };
+
   app.updateKeysEls = () => {
-    let allGuessesHash = app.state.guesses
-      .reduce((arr, rowOfGuesses) => {
-        rowOfGuesses.forEach((guess) => {
-          if (guess) arr.push(guess);
-        });
-        return arr;
-      }, [])
-      .reduce((hash, guess) => {
-        hash[guess.letter] = guess.status;
-        return hash;
-      }, {});
     app.getKeyEls().forEach((keyEl) => {
-      let status = allGuessesHash[keyEl.dataset.letter];
+      let status = app.state.keysHash[keyEl.dataset.letter].status;
+      if (!status) return null;
       if (status === "exact") {
         keyEl.classList.add("exact");
       } else if (status === "almost") {
