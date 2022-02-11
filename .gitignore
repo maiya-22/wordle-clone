@@ -1,0 +1,8 @@
+node_modules
+*/data
+*package-lock.json
+*.DS_Store
+dist
+*.parcel-cache
+scratch.js
+scratch-api.js

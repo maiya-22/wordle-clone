@@ -1,0 +1,1 @@
+- start app w `npx parcel src/index.html`
