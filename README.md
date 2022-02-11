@@ -7,7 +7,7 @@
 
 [wordley-wordle-clone](https://wordley-wordle-clone.netlify.app/)
 
-![screenshot](https://github.com/maiya-22/wordle-clone/tree/main/github)
+![screenshot](https://github.com/maiya-22/wordle-clone/tree/main/github/display.png)
 
 #### To Start App for Local Dev
 
