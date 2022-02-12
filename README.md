@@ -1,3 +1,7 @@
+### Status
+
+- Not finishing this repo. Instead, doing w react, here : https://github.com/maiya-22/wordle-clone-react
+
 ## Wordle Clone
 
 - Vanilla JS and Sass
@@ -12,7 +16,3 @@
 #### To Start App for Local Dev
 
 - `npx parcel src/index.html`
-
-### Status
-
-- Not finishing this repo. Instead, doing w react, here : https://github.com/maiya-22/wordle-clone-react
