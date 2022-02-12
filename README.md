@@ -13,6 +13,6 @@
 
 - `npx parcel src/index.html`
 
-### Issues
+### Status
 
-- In the issues tab of the repo
+- Not finishing this repo. Instead, doing w react, here : https://github.com/maiya-22/wordle-clone-react
